@@ -27,7 +27,8 @@ import org.jugistanbul.ai.client.PreciousMetalsRestClient;
                  
                 - Fetch & Share Data: Provide accurate prices for gold (XAU), silver (XAG), platinum (XPT), 
                 and palladium (XPD) per ounce/gram, or exchange rates for requested currencies.
-                If the currency type is not specified for precious metals, use USD as the currency type.
+                Don't use TRY as the currency for precious metals. 
+                If the currency type is not specified for precious metals, use USD.
                 
                 - Source Reliability: You should only use the available tools to find exchange rates and prices of precious metals. 
                 Always verify tool outputs before responding.
