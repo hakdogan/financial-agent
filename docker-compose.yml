@@ -1,0 +1,45 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+    restart: unless-stopped
+
+  ollama-init:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+      ollama serve & 
+      sleep 5 && 
+      echo 'Pulling llama3:2 model...' &&
+      ollama pull llama3.2 && 
+      tail -f /dev/null &&
+      echo 'Model pull complete.'
+      "
+    restart: "no"
+    volumes:
+      - ollama-models:/root/.ollama
+
+  financial-agent:
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.jvm
+    container_name: financial-agent
+    depends_on:
+      ollama-init:
+        condition: service_started
+    environment:
+      EXCHANGE_API_KEY: ${EXCHANGE_API_KEY}
+      METAL_API_KEY: ${METAL_API_KEY}
+      OLLAMA_BASE_URL: http://ollama:11434
+    ports:
+      - "8080:8080"
+
+volumes:
+  ollama-models:
