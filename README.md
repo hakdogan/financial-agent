@@ -22,10 +22,42 @@ It leverages **function calling** to query real-time currency and precious metal
 ### Run in development mode
 You can start the application with your API keys as system properties:
 ```bash
-mvn -DEXCHANGE-KEY=your_alpha_vantage_key -DMETAL-KEY=your_goldapi_key quarkus:dev
+mvn -DEXCHANGE_API_KEY=your_alpha_vantage_key -DMETAL_API_KEY=your_goldapi_key quarkus:dev
 ```
 
 > ℹ️ During startup, if Docker or Podman is available, Quarkus will automatically launch an Ollama container.
+
+### 🐳 Run with Docker Compose
+You can also run the application and Ollama together using Docker Compose.
+
+1. Set your API keys
+   Create a `.env` file in the project root:
+
+```bash
+EXCHANGE_API_KEY=your_alpha_vantage_key
+METAL_API_KEY=your_goldapi_key
+```
+
+2. Build the JAR
+```bash
+mvn clean package -DskipTests
+```
+3. Start with Docker Compose
+```bash
+docker-compose up --build
+```
+This will:
+
+- Start an Ollama container and automatically download the llama3:2 model.
+- Start your Quarkus-based financial agent service.
+- Connect both services in the same Docker network.
+
+## 🛠️ Configuration
+| Property	      | Description                | 	Example                    |
+|----------------|----------------------------|-----------------------------|
+| EXCHANGE_API_KEY	 | API key for Alpha Vantage  | 	ABC123XYZ                  |
+| METAL_API_KEY	 | API key for GoldAPI | 	goldapi-xxxxxxxx-xxxx-xxxx |
+| OLLAMA_BASE_URL |	Base URL for Ollama service (optional) | http://ollama:11434 |
 
 ### Example Prompts
 
