@@ -1,11 +1,11 @@
 # financial-agent
 
 `financial-agent` is an AI-powered financial assistant built with [Quarkus's](https://quarkus.io/), [Ollama](https://ollama.com/) and [LangChain4j](https://github.com/langchain4j/langchain4j) extensions.  
-It leverages **function calling** to query real-time currency and precious metal prices from external APIs.
+It leverages **function calling** to query real-time stock, currency, and precious metal prices from external APIs.
 
 ## ✨ Features
 
-- 💱 **Exchange Rates**: Fetches real-time currency exchange rates using the [Alpha Vantage API](https://www.alphavantage.co/).
+- 💱 **Exchange Rates**: Fetches real-time stock and currency exchange rates using the [Alpha Vantage API](https://www.alphavantage.co/).
 - 🪙 **Precious Metals Prices**: Retrieves current metal prices (gold, silver, etc.) using the [GoldAPI](https://www.goldapi.io/).
 - 🧠 **LLM-powered reasoning**: Uses [Ollama](https://ollama.com/) and [LangChain](https://www.langchain.com/) for intelligent prompt interpretation and function calling.
 - 🐳 **Automatic Ollama Integration**: If Docker or Podman is available, the Ollama instance is automatically launched by Quarkus during dev mode.
@@ -69,4 +69,8 @@ http GET "http://localhost:8080/api/v1/exchange/1 dolar kaç Türk lirası?"
 http GET "http://localhost:8080/api/v1/exchange/Altının ons fiyatı ne kadar?"
 
 Altının (XAU) ons fiyatı şu anda 3323.72 USD'dir.
+
+http GET "http://localhost:8080/api/v1/exchange/Apple güncel fiyatı nedir?"
+
+Apple'ın (AAPL) güncel fiyatı 211,18 USD'dir.
 ```

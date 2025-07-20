@@ -21,7 +21,16 @@ public interface ExchangeRestClient {
     @Produces(MediaType.APPLICATION_JSON)
     @ClientQueryParam(name = "function", value = "CURRENCY_EXCHANGE_RATE")
     @ClientQueryParam(name = "apikey", value = "${api.exchange.key}")
-    @Tool("Returns the current price of the given exchange rate")
-    String fetchExchangePrice(@RestQuery("from_currency") String fromCurrency,
+    @Tool("Returns the current value of the given exchange rate")
+    String fetchExchangeRate(@RestQuery("from_currency") String fromCurrency,
                               @RestQuery("to_currency") String toCurrency);
+
+
+    @GET
+    @Path("/query")
+    @Produces(MediaType.APPLICATION_JSON)
+    @ClientQueryParam(name = "function", value = "GLOBAL_QUOTE")
+    @ClientQueryParam(name = "apikey", value = "${api.exchange.key}")
+    @Tool("Returns the price of the given {symbol}")
+    String fetchStockPrice(@RestQuery("symbol") String symbol);
 }
